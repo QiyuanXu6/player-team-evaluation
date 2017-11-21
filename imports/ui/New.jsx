@@ -1,31 +1,63 @@
 import React, { Component } from 'react';
 import {Players} from '../api/players';
 
+
+
 export default class New extends Component {
-  submitPlayer(event) {
-    event.preventDefault();
-    let player = {
-      name:this.refs.name.value ,
-      team:this.refs.team.value ,
-      KDA:this.refs.KDA.value ,
-      GPM:this.refs.GPM.value ,
-      WinRates:this.refs.WinRates.value ,
-      XPM:this.refs.XPM.value ,
-      LH:this.refs.LH.value ,
-      DPM:this.refs.DPM.value ,
-      notes: this.refs.notes.value,
-      createdAt: new Date(),
-      owner: Meteor.userId(),
-    };
+  constructor(props) {
+    super(props);
+    this.meteorInsert = this.meteorInsert.bind(this);
+    this.submitPlayer = this.submitPlayer.bind(this);
+  }
+
+  meteorInsert(player) {
     Meteor.call('insertPlayer', player, (error) => {
       if (error) {
-        alert("Oups"+error.reason);
+        alert("Oups "+error.reason);
       } else {
         alert("Added");
         this.props.history.push('/');
       }
     });
+  }
 
+  submitPlayer(event) {
+    event.preventDefault();
+
+
+    var apiRequest1 = fetch(`https://api.opendota.com/api/players/${this.refs.sid.value}/totals/?limit=10`).then(function(response){ 
+      return response.json()
+    });
+    var apiRequest2 = fetch(`https://api.opendota.com/api/players/${this.refs.sid.value}`).then(function(response){
+      return response.json()
+    });
+    
+    Promise.all([apiRequest1,apiRequest2]).then(function(values){
+      var data = values[0];
+      var role = values[1];
+
+      var data_KDA = data[3].sum / data[3].n;
+      var data_GPM = data[4].sum / data[4].n;
+      var data_XPM = data[5].sum / data[5].n;
+      var data_HD = data[11].sum / data[11].n;
+      var data_TD = data[12].sum / data[12].n;
+      var data_HH = data[13].sum / data[13].n;
+
+      let player = {
+        name:role.profile.personaname ,
+        team:"Default" ,
+        KDA: data_KDA,
+        GPM: data_GPM,
+        HD: data_HD ,
+        XPM: data_XPM,
+        TD: data_TD ,
+        HH: data_HH,
+        notes: role.profile.avatarfull,
+        createdAt: new Date(),
+        owner: Meteor.userId(),
+      }.bind(this);
+      this.meteorInsert(player);
+    }.bind(this));
   }
 
   render() {
@@ -35,11 +67,15 @@ export default class New extends Component {
           <h3>Add a new player</h3>
           <div className="row">
 
-            <div className="input-field col s6">
+            <div className="input-field col s4">
               <input placeholder="Name" ref="name" type="text" className="validate" />
             </div>
-            <div className="input-field col s6">
+            <div className="input-field col s4">
               <input placeholder="Team" ref="team" type="text" className="validate" />
+            </div>
+
+            <div className="input-field col s4">
+              <input placeholder="Steam id (32)" ref="sid" type="text" className="validate" />
             </div>
 
           </div>
@@ -53,16 +89,16 @@ export default class New extends Component {
               <input placeholder="GPM" ref="GPM" type="text" className="validate" />
             </div>
             <div className="input-field col s6">
-              <input placeholder="WinRates" ref="WinRates" type="text" className="validate" />
+              <input placeholder="HD" ref="HD" type="text" className="validate" />
             </div>
             <div className="input-field col s6">
               <input placeholder="XPM" ref="XPM" type="text" className="validate" />
             </div>
             <div className="input-field col s6">
-              <input placeholder="LH" ref="LH" type="text" className="validate" />
+              <input placeholder="TD" ref="TD" type="text" className="validate" />
             </div>
             <div className="input-field col s6">
-              <input placeholder="DPM" ref="DPM" type="text" className="validate" />
+              <input placeholder="HH" ref="HH" type="text" className="validate" />
             </div>
 
           </div>

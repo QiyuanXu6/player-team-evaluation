@@ -30,8 +30,8 @@ const renderChips = (player) => {
           style={styles.chip}
           key={p}
         >
-          <Avatar size={32} color={blue200} backgroundColor={blue900}>{player[p]}</Avatar>
-          {p}
+          <Avatar size={32} color={blue200} backgroundColor={blue900}>{p}</Avatar>
+          {player[p]}
         </Chip>
       );
     }
@@ -39,10 +39,14 @@ const renderChips = (player) => {
   return doms.map((dom) => {return dom});
 }
 
+
 export default class Player extends Component {
+
   showEditForm() {
     this.props.showEditForm();
   }
+
+
   render() {
     const player = this.props.player;
     return (
@@ -50,7 +54,7 @@ export default class Player extends Component {
         <CardMedia
           overlay={<CardTitle title={player.name} subtitle={"Team: " + player.team} />}
         >
-          <img src="Miracle-.png" alt="" />
+          <img src={this.props.player.notes} alt="No player seleted"  />
         </CardMedia>
 
         <CardText>

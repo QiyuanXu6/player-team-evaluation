@@ -8,7 +8,7 @@ export default class TeamStats extends Component {
   render() {
     const players = this.props.players;
     const data = {
-      labels: ['KDA', 'GPM', 'WinRates', 'XPM', 'LH', 'DPM'],
+      labels: ['KDA', 'GPM', 'HD', 'XPM', 'TD', 'HH'],
       datasets: [
         {
           label: 'Player radar table',

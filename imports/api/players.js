@@ -17,12 +17,12 @@ Players.deny({
 const PlayerSchema = new SimpleSchema({
   name: { type: String, },
   team: { type: String, },
-  KDA: { type: Number, defaultValue: 0},
-  GPM: { type: Number, defaultValue: 0},
-  WinRates: { type: Number, defaultValue: 0},
-  XPM: { type: Number, defaultValue: 0},
-  LH: { type: Number, defaultValue: 0},
-  DPM: { type: Number, defaultValue: 0},
+  KDA: { type: Number, defaultValue: 0, decimal: true},
+  GPM: { type: Number, defaultValue: 0, decimal: true},
+  HD: { type: Number, defaultValue: 0, decimal: true},
+  XPM: { type: Number, defaultValue: 0, decimal: true},
+  TD: { type: Number, defaultValue: 0, decimal: true},
+  HH: { type: Number, defaultValue: 0, decimal: true},
   notes: { type: String, optional: true},
   owner: { type: String },
 });

@@ -12,10 +12,10 @@ export default class EditPlayer extends Component {
       team:this.refs.team.value ,
       KDA:this.refs.KDA.value ,
       GPM:this.refs.GPM.value ,
-      WinRates:this.refs.WinRates.value ,
+      HD:this.refs.HD.value ,
       XPM:this.refs.XPM.value ,
-      LH:this.refs.LH.value ,
-      DPM:this.refs.DPM.value ,
+      TD:this.refs.TD.value ,
+      HH:this.refs.HH.value ,
       notes: this.refs.notes.value,
       createdAt: new Date(),
       owner: Meteor.userId(),
@@ -60,13 +60,13 @@ export default class EditPlayer extends Component {
               <input placeholder="GPM" ref="GPM" type="text" className="validate" defaultValue={currentPlayer.GPM}/>
             </div>
             <div className="input-field col s6">
-              <input placeholder="WinRates" ref="WinRates" type="text" className="validate" defaultValue={currentPlayer.WinRates}/>
+              <input placeholder="HD" ref="HD" type="text" className="validate" defaultValue={currentPlayer.HD}/>
             </div>
             <div className="input-field col s6">
               <input placeholder="XPM" ref="XPM" type="text" className="validate" defaultValue={currentPlayer.XPM}/>
             </div>
             <div className="input-field col s6">
-              <input placeholder="LH" ref="LH" type="text" className="validate" defaultValue={currentPlayer.LH}/>
+              <input placeholder="TD" ref="TD" type="text" className="validate" defaultValue={currentPlayer.TD}/>
             </div>
             <div className="input-field col s6">
               <input placeholder="DPM" ref="DPM" type="text" className="validate" defaultValue={currentPlayer.DPM}/>

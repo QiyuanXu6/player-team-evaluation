@@ -22,11 +22,11 @@ const tempPlayer = {
   team: "Temp team",
   KDA: 5 ,
   GPM: 400 ,
-  WinRates:50 ,
+  HD:50 ,
   XPM: 400 ,
-  LH: 20 ,
-  DPM: 400 ,
-  notes: "This is temporary",
+  TD: 20 ,
+  HH: 400 ,
+  notes: "Miracle-.png",
 };
 
 class App extends Component {

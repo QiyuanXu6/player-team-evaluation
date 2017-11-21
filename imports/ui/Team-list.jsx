@@ -27,7 +27,7 @@ export default class TeamList extends Component {
     return (
       <ListItem
         primaryText={this.props.player.name}
-        leftAvatar={<Avatar src="Avatar-Yao.png"/>}
+        leftAvatar={<Avatar src={this.props.player.notes}/>}
         rightIcon={<ActionDeleteForever hoverColor={red500}
           onClick={this.deletePlayer.bind(this, this.props.player._id)}
         />}
