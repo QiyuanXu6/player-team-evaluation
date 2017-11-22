@@ -17,7 +17,7 @@ export default class TeamStats extends Component {
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: 'rgba(12,71,161,1)',
-          data: [player.KDA, player.GPM, player.HD, player.XPM, player.TD, player.HH]
+          data: [player.KDA/3, player.GPM/500, player.HD/20000, player.XPM/500, player.TD/1200, player.HH/300]
       }
     });
   }
@@ -38,6 +38,7 @@ export default class TeamStats extends Component {
             height={500}
             option={{
               maintainAspectRatio: false,
+              type: "logarithmic"
             }}/>
           </div>
           <div className="col s12 m5">
