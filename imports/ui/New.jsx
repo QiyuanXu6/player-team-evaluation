@@ -35,6 +35,7 @@ export default class New extends Component {
     Promise.all([apiRequest1,apiRequest2]).then(function(values){
       var data = values[0];
       var role = values[1];
+      console.log(role.profile.personaname);
 
       var data_KDA = data[3].sum / data[3].n;
       var data_GPM = data[4].sum / data[4].n;
@@ -55,7 +56,7 @@ export default class New extends Component {
         notes: role.profile.avatarfull,
         createdAt: new Date(),
         owner: Meteor.userId(),
-      }.bind(this);
+      };
       this.meteorInsert(player);
     }.bind(this));
   }

@@ -5,22 +5,28 @@ import Divider from 'material-ui/Divider';
 
 
 export default class TeamStats extends Component {
-  render() {
-    const players = this.props.players;
-    const data = {
-      labels: ['KDA', 'GPM', 'HD', 'XPM', 'TD', 'HH'],
-      datasets: [
-        {
-          label: 'Player radar table',
+
+  radar() {
+    const players = this.props.players.slice(0, 5);
+    return players.map((player) => {
+      return {
+          label: player.name,
           backgroundColor: 'rgba(143,202,249,0.2)',
           borderColor: 'rgba(12,71,161,1)',
           pointBackgroundColor: 'rgba(12,71,161,1)',
           pointBorderColor: '#fff',
           pointHoverBackgroundColor: '#fff',
           pointHoverBorderColor: 'rgba(12,71,161,1)',
-          data: [65, 59, 90, 81, 56, 55]
-        }
-      ]
+          data: [player.KDA, player.GPM, player.HD, player.XPM, player.TD, player.HH]
+      }
+    });
+  }
+
+  render() {
+
+    const data = {
+      labels: ['KDA', 'Gold PM', 'Hero Damage', 'Ex PM', 'Tower Damage', 'Healing'],
+      datasets: this.radar(),
     };
     return (
       <div>
